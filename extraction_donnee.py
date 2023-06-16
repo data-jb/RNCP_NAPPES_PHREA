@@ -37,7 +37,7 @@ df_list = []
 
 for annee in annees :
     # URL de la page web contenant le tableau
-    url = 'https://www.infoclimat.fr/climatologie/annee/{annee}/limoges-bellegarde/valeurs/07434.html'
+    url = f"https://www.infoclimat.fr/climatologie/annee/{annee}/limoges-bellegarde/valeurs/07434.html"
 
     # Effectuer la requête HTTP et lire le contenu de la page
     response = urlopen(url)
@@ -74,8 +74,7 @@ for annee in annees :
     # Transposer le dataframe
     df_transposed = df.transpose()
     df_transposed.reset_index(drop=True, inplace=True)
-    print(df_transposed)
-
+    
     # Trouver la balise <div> avec un attribut id spécifique
     div_id = 'header-table-station'  # Remplacez par l'attribut id de la balise <div> souhaitée
     div_element = soup.find('div', id=div_id)
@@ -111,8 +110,7 @@ for annee in annees :
     df_transposed.drop('Station', axis=1, inplace=True)
     # Ajouter le DataFrame à la liste
     df_list.append(df_transposed)
-    # Ajouter le délai de 1 seconde entre chaque itération de la boucle
-    time.sleep(20)
+
 
 # Concaténer les DataFrames en un seul DataFrame final
 df_concatenated = pd.concat(df_list, ignore_index=True)
